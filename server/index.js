@@ -16,12 +16,9 @@ const createArrOfFiles = (function () {
 	return arrOfFiles;
 })();
 
-const uri =
-	'mongodb+srv://Brailler:Faithful08@cluster0.p7oq0.mongodb.net/BrailleApp?retryWrites=true&w=majority';
-
 //const data = fs.readFileSync('../public/images/A.jpg');
 
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.DATABASE_URL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	serverApi: ServerApiVersion.v1,
