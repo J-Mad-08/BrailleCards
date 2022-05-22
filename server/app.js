@@ -1,5 +1,5 @@
 require("dotenv").config();
-// console.log(process.env);
+console.log(process.env);
 
 const connectDB = require("./config/db");
 
@@ -28,6 +28,7 @@ app.use("/user", require("./routes/user"));
 app.use("/auth", require("./routes/auth"));
 
 const PORT = process.env.SERVER_PORT;
+console.log(PORT);
 const server = app.listen(PORT, () => {
   // Connect to database
   console.log(`Server listening on port: ${PORT}`);
