@@ -1,13 +1,19 @@
-const db = require('../config/db').default;
-const Card = require('../models/cardModel');
-const mongoose = require('mongoose');
+const connectDB = require("../config/db");
+
+const db = connectDB();
+const Card = require("../models/cardModel");
+const mongoose = require("mongoose");
 
 // @desc Get all cards
 //@route GET /cards
 //@access Private
 
-exports.getAllCards = (req, res, next) => {
-	res.status(200).json({ success: true, message: 'Query the db' });
+exports.getANewCard = async (req, res, next) => {
+  console.log(db, "DB");
+  const cards = await db.collection("Cards").find({});
+  console.log(cards);
+  res.status(200).json({ success: true, message: "Query the db" });
+  return next();
 };
 
 // @desc Get all correct cards
@@ -15,7 +21,8 @@ exports.getAllCards = (req, res, next) => {
 //@access Private
 
 exports.getCorrectCards = (req, res, next) => {
-	res.status(200).json({ success: true, message: 'Grab the right cards' });
+  res.status(200).json({ success: true, message: "Grab the right cards" });
+  return next();
 };
 
 // @desc Get all incorrect cards
@@ -23,10 +30,11 @@ exports.getCorrectCards = (req, res, next) => {
 //@access Private
 
 exports.getWrongCards = (req, res, next) => {
-	res.status(200).json({
-		success: true,
-		message: 'Grab the wrong cards',
-	});
+  res.status(200).json({
+    success: true,
+    message: "Grab the wrong cards",
+  });
+  return next();
 };
 
 // @desc Update incorrect card
@@ -34,9 +42,8 @@ exports.getWrongCards = (req, res, next) => {
 // @access Private
 
 exports.updateWrongCards = (req, res, next) => {
-	res
-		.status(200)
-		.json({ success: true, message: 'Update the wrong cards', cards: [] });
+  res
+    .status(200)
+    .json({ success: true, message: "Update the wrong cards", cards: [] });
+  return next();
 };
-
-exports.createCardDeck = (req, res, next) => {};

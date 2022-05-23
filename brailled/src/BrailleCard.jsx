@@ -30,18 +30,22 @@ export default function BrailleCard() {
     const { value } = e.target;
 
     setInput(value);
-    
   }
 
   function formSubmitHandler(e) {
     e.preventDefault();
-    console.log(input, "in formSubmitHandler");
-    fetch(`http://localhost:4001/{input}`)
-      .then((res) => res.status())
+    // console.log(input, "in formSubmitHandler");
+    fetch(`http://localhost:4001/card/{input}`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
   }
-
   return (
     // center the styling
     <>
