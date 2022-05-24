@@ -21,9 +21,10 @@ connectDB((err)=> {
   db = getDb();
 });
 
-app.get('/card/:id', (req, res)=> {
+app.get('/card/:id', async (req, res)=> {
   const cardArr= [];
-   const cards = db.collection('Cards').find().forEach(card => cardArr.push(card)); //cursor
+   const cards = await db.collection('Cards').find().forEach(card => cardArr.push(card)); //cursor
+   console.log(cards)
    res.send(cardArr);
 })
 // middleware
