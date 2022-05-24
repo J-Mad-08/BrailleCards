@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cypress run",
-    "eject": "react-scripts eject"
+    "open": "cypress open",
+    "eject": "react-scripts eject",
+    "serve": "nodemon server/app.js"
   },
   "eslintConfig": {
     "extends": [

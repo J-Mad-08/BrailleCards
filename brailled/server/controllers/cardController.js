@@ -1,6 +1,3 @@
-const connectDB = require("../config/db");
-
-const db = connectDB();
 const Card = require("../models/cardModel");
 const mongoose = require("mongoose");
 

@@ -1,7 +1,8 @@
 require("dotenv").config();
 console.log(process.env);
 
-const connectDB = require("./config/db");
+const {connectDB, getDb} = require("./config/db");
+
 
 const express = require("express");
 const app = express();
@@ -9,8 +10,22 @@ const cors = require("cors");
 const path = require("path");
 
 // Connect to db
-connectDB();
+let db;
 
+connectDB((err)=> {
+  if (!err){
+    app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
+  }
+  db = getDb();
+});
+
+app.get('/card/:id', (req, res)=> {
+  const cardArr= [];
+   const cards = db.collection('Cards').find().forEach(card => cardArr.push(card)); //cursor
+   res.send(cardArr);
+})
 // middleware
 app.use(cors());
 app.use(express.json()); // allows access to req.body
@@ -29,10 +44,7 @@ app.use("/auth", require("./routes/auth"));
 
 const PORT = process.env.SERVER_PORT;
 
-const server = app.listen(PORT, () => {
-  // Connect to database
-  console.log(`Server listening on port: ${PORT}`);
-});
+
 
 // Handle unhandled Promise rejections
 //Custom Error Handler
